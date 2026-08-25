@@ -26,8 +26,27 @@ public class Controller {
 
     @PostMapping
     ResponseEntity<Personagem> criarPersonagem(@RequestBody Personagem personagem){
-        personagem.setId(contador++);
-        personagens.add(personagem);
+        String sql = """
+                INSERT INTO personagem
+                (nome, classe, raca, nivel, forca, dex, con, inte, sab, car, data_criacao)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """;
+
+        jdbcTemplate.update(
+                sql,
+                personagem.getNome(),
+                personagem.getClasse(),
+                personagem.getRaca(),
+                personagem.getNivel(),
+                personagem.getForca(),
+                personagem.getDex(),
+                personagem.getCon(),
+                personagem.getInte(),
+                personagem.getSab(),
+                personagem.getCar(),
+                personagem.getDataCriacao()
+        );
+
         return ResponseEntity.status(201).body(personagem);
     }
 }
