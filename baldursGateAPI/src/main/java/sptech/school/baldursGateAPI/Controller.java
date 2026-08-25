@@ -18,14 +18,14 @@ public class Controller {
     private JdbcTemplate jdbcTemplate;
 
     @GetMapping
-    ResponseEntity<List<Personagem>> listarPersonagens(){
+    public ResponseEntity<List<Personagem>> listarPersonagens(){
         String sql = "SELECT * FROM personagem;";
-        List<Personagem> personagens = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>());
+        List<Personagem> personagens = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Personagem.class));
         return ResponseEntity.status(200).body(personagens);
     }
 
     @PostMapping
-    ResponseEntity<Personagem> criarPersonagem(@RequestBody Personagem personagem){
+    public ResponseEntity<Personagem> criarPersonagem(@RequestBody Personagem personagem){
         String sql = """
                 INSERT INTO personagem
                 (nome, classe, raca, nivel, forca, dex, con, inte, sab, car, data_criacao)
