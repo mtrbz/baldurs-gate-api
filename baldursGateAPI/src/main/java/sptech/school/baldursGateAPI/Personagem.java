@@ -16,12 +16,12 @@ public class Personagem {
     private Integer sab;
     private Integer car;
     private LocalDate dataCriacao;
-    private List<String> party;
+    private List<Party> party;
 
     public Personagem() {
     }
 
-    public Personagem(Integer id, String nome, String classe, Integer nivel, String raca, Integer forca, Integer dex, Integer con, Integer inte, Integer sab, Integer car, LocalDate dataCriacao, List<String> party) {
+    public Personagem(Integer id, String nome, String classe, Integer nivel, String raca, Integer forca, Integer dex, Integer con, Integer inte, Integer sab, Integer car, LocalDate dataCriacao, List<Party> party) {
         this.id = id;
         this.nome = nome;
         this.classe = classe;
@@ -133,11 +133,11 @@ public class Personagem {
         this.dataCriacao = dataCriacao;
     }
 
-    public List<String> getParty() {
+    public List<Party> getParty() {
         return party;
     }
 
-    public void setParty(List<String> party) {
+    public void setParty(List<Party> party) {
         this.party = party;
     }
 }
