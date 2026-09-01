@@ -1,0 +1,66 @@
+/* ============================================
+   FILTROS — Lista de personagens
+   ============================================ */
+
+.cabecalho-tela {
+  padding: var(--esp-xl) 0 var(--esp-md);
+}
+
+.cabecalho-tela__titulo {
+  font-family: var(--fonte-display);
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  color: var(--pergaminho);
+}
+
+.cabecalho-tela__descricao {
+  color: var(--pergaminho-fosco);
+  margin-top: 0.4rem;
+}
+
+.cabecalho-tela--com-acao {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--esp-md);
+  flex-wrap: wrap;
+}
+
+@media (max-width: 560px) {
+  .cabecalho-tela--com-acao {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+.barra-filtros {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: var(--esp-lg);
+}
+
+.filtro-chip {
+  background: transparent;
+  border: 1px solid var(--linha-forte);
+  color: var(--pergaminho-fosco);
+  font-size: 0.85rem;
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  transition: border-color var(--transicao-rapida), color var(--transicao-rapida),
+    background-color var(--transicao-rapida);
+}
+
+.filtro-chip:hover {
+  border-color: var(--pergaminho-fosco);
+  color: var(--pergaminho);
+}
+
+.filtro-chip.ativo {
+  border-color: var(--dourado);
+  color: var(--dourado-claro);
+  background: rgba(201, 161, 90, 0.08);
+}
+
+.secao-lista {
+  padding-bottom: var(--esp-xxl);
+}

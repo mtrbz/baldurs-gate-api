@@ -1,0 +1,223 @@
+/* ============================================
+   FICHA DO PERSONAGEM
+   ============================================ */
+
+.layout-ficha {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: var(--esp-xl);
+  padding: var(--esp-md) 0 var(--esp-xxl);
+  align-items: start;
+}
+
+@media (max-width: 860px) {
+  .layout-ficha {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cabecalho-personagem {
+  position: sticky;
+  top: 90px;
+}
+
+@media (max-width: 860px) {
+  .cabecalho-personagem {
+    position: static;
+    max-width: 280px;
+    margin: 0 auto;
+  }
+}
+
+.cabecalho-personagem__retrato {
+  aspect-ratio: 3 / 4;
+  margin-bottom: var(--esp-md);
+}
+
+.cabecalho-personagem__nome {
+  font-family: var(--fonte-display);
+  font-size: 1.7rem;
+  color: var(--pergaminho);
+  text-align: center;
+}
+
+.cabecalho-personagem__tipo {
+  text-align: center;
+  color: var(--dourado-fosco);
+  font-size: 0.95rem;
+  margin-top: 0.3rem;
+}
+
+.cabecalho-personagem__nivel {
+  text-align: center;
+  color: var(--pergaminho-fosco);
+  font-size: 0.9rem;
+  margin-top: 0.4rem;
+}
+
+.cabecalho-personagem__nivel strong {
+  color: var(--dourado-claro);
+  font-family: var(--fonte-display);
+  font-size: 1.05rem;
+}
+
+.corpo-ficha {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-xl);
+}
+
+/* ---- Atributos (exibição, círculos de RPG) ---- */
+.grade-atributos-exibicao {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--esp-md);
+}
+
+@media (max-width: 640px) {
+  .grade-atributos-exibicao {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 420px) {
+  .grade-atributos-exibicao {
+    grid-template-columns: 1fr;
+  }
+}
+
+.atributo-medalhao {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-md);
+  background: var(--carvao-painel);
+  border: 1px solid var(--linha);
+  padding: var(--esp-md);
+}
+
+.atributo-medalhao__circulo {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1px solid var(--dourado-fosco);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: radial-gradient(circle, rgba(201, 161, 90, 0.08), transparent 70%);
+}
+
+.atributo-medalhao__valor {
+  font-family: var(--fonte-display);
+  font-size: 1.3rem;
+  color: var(--dourado-claro);
+}
+
+.atributo-medalhao__nome {
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  color: var(--pergaminho-fosco);
+}
+
+/* ---- Party na ficha ---- */
+.lista-party-ficha {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.lista-party-ficha + .btn {
+  margin-top: var(--esp-md);
+}
+
+.item-party-ficha {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-md);
+  background: var(--carvao-painel);
+  border: 1px solid var(--linha);
+  padding: 0.85rem var(--esp-md);
+}
+
+.item-party-ficha__retrato {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.item-party-ficha__nome {
+  font-family: var(--fonte-display);
+  font-size: 1rem;
+  color: var(--pergaminho);
+}
+
+/* ---- Ações da ficha ---- */
+.acoes-ficha {
+  display: flex;
+  gap: var(--esp-sm);
+  flex-wrap: wrap;
+}
+
+@media (max-width: 560px) {
+  .acoes-ficha {
+    flex-direction: column;
+  }
+  .acoes-ficha .btn {
+    width: 100%;
+  }
+}
+
+/* ---- Modal de confirmação de exclusão ---- */
+.sobreposicao-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(6, 5, 4, 0.78);
+  backdrop-filter: blur(3px);
+  padding: var(--esp-md);
+}
+
+.sobreposicao-modal.visivel {
+  display: flex;
+}
+
+.modal-confirmacao {
+  background: var(--carvao-painel);
+  border: 1px solid var(--dourado-fosco);
+  box-shadow: var(--sombra-painel);
+  max-width: 380px;
+  width: 100%;
+  padding: var(--esp-lg);
+  text-align: center;
+}
+
+.modal-confirmacao__icone {
+  width: 34px;
+  height: 34px;
+  margin: 0 auto var(--esp-md);
+  color: var(--dourado-fosco);
+}
+
+.modal-confirmacao__titulo {
+  font-family: var(--fonte-display);
+  font-size: 1.2rem;
+  color: var(--pergaminho);
+  margin-bottom: 0.5rem;
+}
+
+.modal-confirmacao__texto {
+  color: var(--pergaminho-fosco);
+  font-size: 0.95rem;
+  margin-bottom: var(--esp-lg);
+}
+
+.modal-confirmacao__acoes {
+  display: flex;
+  gap: var(--esp-sm);
+  justify-content: center;
+}

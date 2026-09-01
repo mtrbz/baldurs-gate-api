@@ -1,0 +1,204 @@
+/* ============================================
+   CARDS — Personagem, companheiro
+   ============================================ */
+
+.card-personagem {
+  background: var(--carvao-painel);
+  border: 1px solid var(--linha);
+  display: flex;
+  flex-direction: column;
+  transition: border-color var(--transicao-media), transform var(--transicao-media);
+}
+
+.card-personagem:hover {
+  border-color: var(--dourado-fosco);
+  transform: translateY(-3px);
+}
+
+.card-personagem__retrato {
+  aspect-ratio: 3 / 4;
+  border-bottom: 1px solid var(--linha);
+}
+
+.card-personagem__corpo {
+  padding: var(--esp-md);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  flex: 1;
+}
+
+.card-personagem__nome {
+  font-family: var(--fonte-display);
+  font-size: 1.12rem;
+  color: var(--pergaminho);
+}
+
+.card-personagem__tipo {
+  color: var(--dourado-fosco);
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+}
+
+.card-personagem__nivel {
+  color: var(--pergaminho-tenue);
+  font-size: 0.85rem;
+  margin-top: 0.2rem;
+}
+
+.card-personagem__nivel strong {
+  color: var(--dourado-claro);
+  font-family: var(--fonte-display);
+}
+
+.card-personagem__acao {
+  margin-top: var(--esp-md);
+}
+
+/* ---- Card de companheiro (seleção de party) ---- */
+.card-companheiro {
+  position: relative;
+  background: var(--carvao-painel);
+  border: 1px solid var(--linha);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  transition: border-color var(--transicao-rapida), box-shadow var(--transicao-rapida),
+    opacity var(--transicao-rapida);
+  text-align: left;
+  width: 100%;
+}
+
+.card-companheiro__retrato {
+  aspect-ratio: 1 / 1;
+  border-bottom: 1px solid var(--linha);
+}
+
+.card-companheiro__corpo {
+  padding: var(--esp-sm) var(--esp-md) var(--esp-md);
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.card-companheiro__nome {
+  font-family: var(--fonte-display);
+  font-size: 1rem;
+  color: var(--pergaminho);
+}
+
+.card-companheiro__classe {
+  color: var(--dourado-fosco);
+  font-size: 0.82rem;
+}
+
+.card-companheiro__raca {
+  color: var(--pergaminho-tenue);
+  font-size: 0.8rem;
+}
+
+.card-companheiro__rodape {
+  margin-top: var(--esp-sm);
+  padding-top: var(--esp-sm);
+  border-top: 1px solid var(--linha);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-companheiro__marca {
+  font-size: 0.78rem;
+  color: var(--pergaminho-tenue);
+  letter-spacing: 0.03em;
+}
+
+.card-companheiro__indicador {
+  width: 18px;
+  height: 18px;
+  border: 1px solid var(--linha-forte);
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color var(--transicao-rapida), background-color var(--transicao-rapida);
+}
+
+.card-companheiro__indicador svg {
+  width: 10px;
+  height: 10px;
+  opacity: 0;
+  color: var(--carvao);
+  transition: opacity var(--transicao-rapida);
+}
+
+/* estado selecionado */
+.card-companheiro.selecionado {
+  border-color: var(--dourado);
+  box-shadow: 0 0 0 1px var(--dourado-linha);
+}
+
+.card-companheiro.selecionado .card-companheiro__marca {
+  color: var(--dourado-claro);
+}
+
+.card-companheiro.selecionado .card-companheiro__indicador {
+  border-color: var(--dourado);
+  background: var(--dourado);
+}
+
+.card-companheiro.selecionado .card-companheiro__indicador svg {
+  opacity: 1;
+}
+
+/* estado desabilitado (limite de party atingido) */
+.card-companheiro.desabilitado {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.card-companheiro:not(.desabilitado):not(.selecionado):hover {
+  border-color: var(--pergaminho-tenue);
+}
+
+/* ---- Grade de companheiros ---- */
+.grade-companheiros {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--esp-md);
+}
+
+@media (max-width: 560px) {
+  .grade-companheiros {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--esp-sm);
+  }
+}
+
+/* ---- Contador de party ---- */
+.contador-party {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 1.1rem;
+  border: 1px solid var(--linha-forte);
+  background: var(--carvao-painel);
+  font-size: 0.9rem;
+  color: var(--pergaminho-fosco);
+}
+
+/* Espaço entre o chip de contador e a grade de companheiros logo abaixo,
+   nas telas onde ele aparece sozinho (fora da tela geral de Party). */
+.espaco-contador {
+  margin-bottom: var(--esp-md);
+}
+
+.contador-party__numero {
+  font-family: var(--fonte-display);
+  color: var(--dourado-claro);
+  font-size: 1.05rem;
+}
+
+.contador-party__numero.completo {
+  color: var(--sucesso);
+}

@@ -1,0 +1,356 @@
+/* ============================================
+   BASE — Texturas, ornamentos, layout global
+   ============================================ */
+
+/* Textura sutil de pergaminho/ruído sobre o fundo escuro,
+   via gradientes radiais leves — sem imagens externas. */
+.textura-fundo {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 90% 60% at 15% -10%, rgba(92, 26, 31, 0.16), transparent 60%),
+    radial-gradient(ellipse 70% 50% at 100% 10%, rgba(201, 161, 90, 0.06), transparent 55%),
+    radial-gradient(ellipse 80% 70% at 50% 120%, rgba(0, 0, 0, 0.5), transparent 60%);
+}
+
+.app {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 var(--esp-lg);
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 0 var(--esp-md);
+  }
+}
+
+/* ---- Cabeçalho fixo do app ---- */
+.topo {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(15, 13, 12, 0.92);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--linha);
+}
+
+.topo__interno {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--esp-sm) var(--esp-lg);
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+@media (max-width: 640px) {
+  .topo__interno {
+    padding: var(--esp-sm) var(--esp-md);
+  }
+}
+
+.marca {
+  display: flex;
+  align-items: baseline;
+  gap: var(--esp-xs);
+  font-family: var(--fonte-display);
+  font-size: 1.05rem;
+  letter-spacing: 0.04em;
+  color: var(--dourado);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.marca__brasao {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.nav-topo {
+  display: flex;
+  gap: var(--esp-lg);
+  flex-shrink: 0;
+}
+
+.nav-topo__link {
+  font-family: var(--fonte-ui);
+  font-size: 0.92rem;
+  color: var(--pergaminho-fosco);
+  padding-bottom: 3px;
+  border-bottom: 1px solid transparent;
+  white-space: nowrap;
+  transition: color var(--transicao-rapida), border-color var(--transicao-rapida);
+}
+
+.nav-topo__link:hover,
+.nav-topo__link.ativo {
+  color: var(--dourado-claro);
+  border-color: var(--dourado-fosco);
+}
+
+@media (max-width: 720px) {
+  .nav-topo {
+    gap: var(--esp-md);
+  }
+  .nav-topo__link {
+    font-size: 0.82rem;
+  }
+}
+
+@media (max-width: 600px) {
+  /* Abaixo desse ponto, o texto do nome do app some e fica só o brasão —
+     evita a quebra de linha do cabeçalho competindo com a navegação. */
+  .marca__texto {
+    display: none;
+  }
+  .marca__brasao {
+    width: 26px;
+    height: 26px;
+  }
+  .nav-topo {
+    gap: var(--esp-sm);
+  }
+  .nav-topo__link {
+    font-size: 0.76rem;
+  }
+}
+
+/* ---- Conteúdo principal ---- */
+.tela {
+  flex: 1;
+  display: none;
+  animation: aparecer 320ms ease;
+}
+
+.tela.ativa {
+  display: block;
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---- Ornamento divisor ---- */
+.ornamento-divisor {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-sm);
+  color: var(--dourado-fosco);
+  margin: var(--esp-lg) 0;
+}
+
+.ornamento-divisor::before,
+.ornamento-divisor::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--linha-forte), transparent);
+}
+
+.ornamento-divisor svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* ---- Botão voltar ---- */
+.btn-voltar {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  color: var(--pergaminho-fosco);
+  font-family: var(--fonte-ui);
+  font-size: 0.92rem;
+  padding: var(--esp-sm) 0;
+  transition: color var(--transicao-rapida), gap var(--transicao-rapida);
+}
+
+.btn-voltar:hover {
+  color: var(--dourado-claro);
+}
+
+.btn-voltar svg {
+  width: 15px;
+  height: 15px;
+}
+
+/* ---- Botões ---- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  font-family: var(--fonte-ui);
+  font-size: 0.95rem;
+  letter-spacing: 0.03em;
+  padding: 0.85rem 1.9rem;
+  border-radius: var(--raio-sm);
+  border: 1px solid transparent;
+  transition: border-color var(--transicao-rapida), background-color var(--transicao-rapida),
+    color var(--transicao-rapida);
+  white-space: nowrap;
+}
+
+.btn--primario {
+  background: linear-gradient(180deg, var(--vinho-claro), var(--vinho));
+  color: var(--pergaminho);
+  border-color: var(--dourado-fosco);
+}
+
+.btn--primario:hover {
+  border-color: var(--dourado);
+  background: linear-gradient(180deg, var(--vinho), var(--vinho-escuro));
+}
+
+.btn--dourado {
+  background: transparent;
+  color: var(--dourado-claro);
+  border-color: var(--dourado-fosco);
+}
+
+.btn--dourado:hover {
+  border-color: var(--dourado);
+  background: rgba(201, 161, 90, 0.08);
+}
+
+.btn--fantasma {
+  background: transparent;
+  color: var(--pergaminho-fosco);
+  border-color: var(--linha-forte);
+}
+
+.btn--fantasma:hover {
+  color: var(--pergaminho);
+  border-color: var(--pergaminho-fosco);
+}
+
+.btn--perigo {
+  background: transparent;
+  color: #d38080;
+  border-color: var(--perigo);
+}
+
+.btn--perigo:hover {
+  background: rgba(156, 59, 59, 0.14);
+  color: #eaa8a8;
+}
+
+.btn--bloco {
+  width: 100%;
+}
+
+.btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.grupo-botoes {
+  display: flex;
+  gap: var(--esp-sm);
+  flex-wrap: wrap;
+}
+
+.grupo-botoes--centralizado {
+  justify-content: center;
+  margin-bottom: var(--esp-lg);
+}
+
+/* ---- Rótulo de seção (não é eyebrow decorativo — sinaliza a
+   entrada em um "capítulo" da ficha, papel funcional no diário) ---- */
+.titulo-secao {
+  font-family: var(--fonte-display);
+  font-size: 1.5rem;
+  color: var(--dourado-claro);
+  letter-spacing: 0.02em;
+  margin-bottom: var(--esp-md);
+}
+
+.subtitulo-secao {
+  color: var(--pergaminho-fosco);
+  font-size: 0.95rem;
+  margin-top: -0.6rem;
+  margin-bottom: var(--esp-lg);
+}
+
+/* ---- Placeholder de imagem ---- */
+.placeholder-imagem {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(155deg, var(--carvao-painel), var(--carvao));
+  border: 1px solid var(--linha);
+  color: var(--pergaminho-tenue);
+  text-align: center;
+  overflow: hidden;
+}
+
+.placeholder-imagem::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--dourado-linha);
+  margin: 6px;
+  pointer-events: none;
+}
+
+.placeholder-imagem__texto {
+  font-family: var(--fonte-ui);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0 var(--esp-sm);
+  position: relative;
+  z-index: 1;
+}
+
+.placeholder-imagem svg {
+  opacity: 0.5;
+}
+
+/* ---- Estado vazio ---- */
+.estado-vazio {
+  text-align: center;
+  padding: var(--esp-xxl) var(--esp-md);
+  color: var(--pergaminho-fosco);
+}
+
+.estado-vazio__titulo {
+  font-family: var(--fonte-display);
+  font-size: 1.3rem;
+  color: var(--dourado-claro);
+  margin-bottom: var(--esp-sm);
+}
+
+/* ---- Rodapé ---- */
+.rodape {
+  border-top: 1px solid var(--linha);
+  padding: var(--esp-lg) 0;
+  margin-top: var(--esp-xxl);
+  text-align: center;
+  color: var(--pergaminho-tenue);
+  font-size: 0.85rem;
+}

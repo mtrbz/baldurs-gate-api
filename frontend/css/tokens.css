@@ -1,0 +1,111 @@
+/* ============================================
+   DESIGN TOKENS — Baldur's Gate Character Journal
+   ============================================ */
+
+:root {
+  /* ---- Cor ---- */
+  --carvao: #0f0d0c;
+  --carvao-claro: #1a1613;
+  --carvao-painel: #211c18;
+  --linha: #33291f;
+  --linha-forte: #4a3a26;
+
+  --vinho: #5c1a1f;
+  --vinho-claro: #7a2530;
+  --vinho-escuro: #3a1014;
+
+  --dourado: #c9a15a;
+  --dourado-claro: #e0c384;
+  --dourado-fosco: #8a6e3d;
+  --dourado-linha: rgba(201, 161, 90, 0.35);
+
+  --pergaminho: #e8dfc8;
+  --pergaminho-fosco: #a79c85;
+  --pergaminho-tenue: #6f6754;
+
+  --sucesso: #6f8f5c;
+  --perigo: #9c3b3b;
+
+  /* ---- Tipografia ---- */
+  --fonte-display: 'Cinzel', Cambria, Georgia, 'Times New Roman', serif;
+  --fonte-corpo: 'EB Garamond', Cambria, Georgia, 'Times New Roman', serif;
+  --fonte-ui: 'EB Garamond', Cambria, Georgia, 'Times New Roman', serif;
+
+  /* ---- Espaçamento ---- */
+  --esp-xs: 0.4rem;
+  --esp-sm: 0.8rem;
+  --esp-md: 1.6rem;
+  --esp-lg: 2.6rem;
+  --esp-xl: 4rem;
+  --esp-xxl: 6.4rem;
+
+  /* ---- Bordas / raio ---- */
+  --raio-sm: 2px;
+  --raio-md: 3px;
+
+  /* ---- Sombra (uso escasso e específico) ---- */
+  --sombra-painel: 0 12px 32px rgba(0, 0, 0, 0.55);
+  --sombra-elevada: 0 4px 14px rgba(0, 0, 0, 0.4);
+
+  /* ---- Transição ---- */
+  --transicao-rapida: 150ms ease;
+  --transicao-media: 260ms ease;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  background-color: var(--carvao);
+  color: var(--pergaminho);
+  font-family: var(--fonte-corpo);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--dourado);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--vinho-claro);
+  color: var(--pergaminho);
+}

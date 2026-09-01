@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 @RestController
 @RequestMapping("/personagens")
 
@@ -22,6 +23,18 @@ public class Controller {
         String sql = "select * from personagem;";
         List<Personagem> personagens = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Personagem.class));
         return ResponseEntity.status(200).body(personagens);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Personagem> listarPersonagem(@PathVariable Integer id){
+        String sql = "select * from personagem where id = ?;";
+        List<Personagem> personagens = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Personagem.class), id);
+
+        if (personagens.isEmpty()){
+            return ResponseEntity.status(404).build();
+        }
+
+        return ResponseEntity.status(200).body(personagens.getFirst());
     }
 
     @PostMapping

@@ -1,0 +1,115 @@
+/* ============================================
+   TELA DA PARTY
+   ============================================ */
+
+.faixa-personagem-atual {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-md);
+  background: var(--carvao-painel);
+  border: 1px solid var(--linha);
+  padding: var(--esp-md) var(--esp-lg);
+  margin-bottom: var(--esp-xl);
+}
+
+.faixa-personagem-atual__retrato {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.faixa-personagem-atual__rotulo {
+  font-size: 0.8rem;
+  color: var(--dourado-fosco);
+  letter-spacing: 0.04em;
+}
+
+.faixa-personagem-atual__nome {
+  font-family: var(--fonte-display);
+  font-size: 1.15rem;
+  color: var(--pergaminho);
+}
+
+.grade-party-atual {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--esp-lg);
+  margin-bottom: var(--esp-xl);
+}
+
+@media (max-width: 720px) {
+  .grade-party-atual {
+    grid-template-columns: 1fr;
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.slot-party {
+  background: var(--carvao-painel);
+  border: 1px solid var(--linha-forte);
+  overflow: hidden;
+}
+
+.slot-party__retrato {
+  aspect-ratio: 1 / 1;
+  border-bottom: 1px solid var(--linha);
+}
+
+.slot-party__corpo {
+  padding: var(--esp-md);
+  text-align: center;
+}
+
+.slot-party__nome {
+  font-family: var(--fonte-display);
+  font-size: 1.1rem;
+  color: var(--pergaminho);
+}
+
+.slot-party__classe {
+  font-size: 0.85rem;
+  color: var(--dourado-fosco);
+  margin-top: 0.2rem;
+}
+
+.slot-party--vazio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 220px;
+  border-style: dashed;
+  color: var(--pergaminho-tenue);
+  font-size: 0.85rem;
+  text-align: center;
+  padding: var(--esp-md);
+}
+
+.painel-alterar-party {
+  border-top: 1px solid var(--linha);
+  padding-top: var(--esp-xl);
+  margin-top: var(--esp-xl);
+}
+
+.painel-alterar-party__cabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--esp-md);
+  margin-bottom: var(--esp-lg);
+}
+
+.painel-alterar-party__cabecalho .titulo-secao {
+  margin-bottom: 0;
+}
+
+
+.painel-alterar-party__rodape {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--esp-lg);
+}
