@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Baldur's Gate — Diário de Aventureiro</title>
+  <link rel="stylesheet" href="css/estilo.css" />
+</head>
+
+<body>
+  <div id="popup-mensagem" class="popup-mensagem">
+    <span id="popup-mensagem-texto"></span>
+  </div>
+
+  <header class="topo">
+    <img src="https://cdn2.steamgriddb.com/logo/a9d4a0a256f5e6ae0452039e3493f22c.png"
+    height="46px" alt="">
+    <span class="topo__titulo">Diário de Aventureiro</span>
+  </header>
+
+  <div class="layout-principal">
+    <!-- Painel esquerdo: formulário de criação -->
+    <section class="painel">
+      <h2 class="painel__titulo">Novo personagem</h2>
+
+      <div class="campo">
+        <label class="campo__rotulo" for="campo-nome">Nome</label>
+        <input class="campo__controle" type="text" id="campo-nome" placeholder="Nome do aventureiro" />
+      </div>
+
+      <div class="grade-campos">
+        <div class="campo">
+          <label class="campo__rotulo" for="campo-classe">Classe</label>
+          <select class="campo__controle" id="campo-classe">
+            <option value="">Selecionar</option>
+            <option>Bárbaro</option>
+            <option>Bardo</option>
+            <option>Clérigo</option>
+            <option>Druida</option>
+            <option>Feiticeiro</option>
+            <option>Guerreiro</option>
+            <option>Ladino</option>
+            <option>Mago</option>
+            <option>Monge</option>
+            <option>Paladino</option>
+            <option>Patrulheiro</option>
+            <option>Bruxo</option>
+          </select>
+        </div>
+        <div class="campo">
+          <label class="campo__rotulo" for="campo-raca">Raça</label>
+          <select class="campo__controle" id="campo-raca">
+            <option value="">Selecionar</option>
+            <option>Humano</option>
+            <option>Elfo</option>
+            <option>Meio-Elfo</option>
+            <option>Tiefling</option>
+            <option>Anão</option>
+            <option>Halfling</option>
+            <option>Gnomo</option>
+            <option>Meio-Orc</option>
+            <option>Githyanki</option>
+            <option>Drow</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grade-campos">
+        <div class="campo">
+          <label class="campo__rotulo" for="campo-nivel">Nível</label>
+          <input class="campo__controle" type="number" id="campo-nivel" min="1" max="20" value="1" />
+        </div>
+        <div class="campo">
+          <label class="campo__rotulo" for="campo-data">Data de criação</label>
+          <input class="campo__controle" type="date" id="campo-data" />
+        </div>
+      </div>
+
+      <h2 class="painel__titulo">Atributos</h2>
+      <div class="grade-atributos" data-atributos-editor>
+        <!-- Editores de atributo inseridos via JavaScript -->
+      </div>
+
+      <h2 class="painel__titulo">
+        Party
+      </h2>
+
+      <p class="party__instrucao">
+        Escolha até 3 companheiros
+      </p>
+
+      <div id="lista-companheiros" class="lista-companheiros">
+        <!-- preenchido pelo JavaScript -->
+      </div>
+
+      <button class="btn" data-acao="criar-personagem">Criar personagem</button>
+    </section>
+
+    <!-- Painel direito: lista de personagens existentes -->
+    <section class="painel">
+      <div class="painel__cabecalho">
+        <h2 class="painel__titulo" style="margin-bottom: 0;">Aventureiros</h2>
+        <span class="contador-personagens"><strong data-total-personagens>0</strong> registrados</span>
+      </div>
+
+      <div class="lista-personagens" data-lista-personagens>
+        <!-- Cards de personagem inseridos via JavaScript (vindos da API) -->
+      </div>
+    </section>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+</body>
+
+</html>

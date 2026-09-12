@@ -1,0 +1,955 @@
+/* ============================================
+   BALDUR'S GATE — DIÁRIO DE AVENTUREIRO
+   Tela única — sem scroll da página
+   ============================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Share+Tech+Mono&display=swap");
+
+
+/* ============================================
+   VARIÁVEIS
+   ============================================ */
+
+:root {
+  --carvao: #0c0b0a;
+  --carvao-claro: #161311;
+  --carvao-painel: #1e1916;
+
+  --linha: #2e2318;
+  --linha-forte: #433323;
+
+  --vinho: #4a1520;
+  --vinho-claro: #6b2030;
+  --vinho-brilho: #8c2a3e;
+
+  --dourado: #c9a15a;
+  --dourado-claro: #e0c384;
+  --dourado-fosco: #8a6e3d;
+  --dourado-brilho: #f0c060;
+
+  --pergaminho: #e2d9c0;
+  --pergaminho-fosco: #9e9278;
+  --pergaminho-tenue: #5e5846;
+
+  --fonte-display: "Cinzel", Cambria, Georgia, serif;
+  --fonte-mono: "Share Tech Mono", "Courier New", Courier, monospace;
+
+  --esp-xs: 0.3rem;
+  --esp-sm: 0.55rem;
+  --esp-md: 1.05rem;
+  --esp-lg: 1.7rem;
+}
+
+
+/* ============================================
+   RESET
+   ============================================ */
+
+* {
+  box-sizing: border-box;
+
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  background: var(--carvao);
+
+  color: var(--pergaminho);
+
+  font-family: var(--fonte-mono);
+
+  font-size: 0.92rem;
+
+  line-height: 1.5;
+
+  overflow: hidden;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+::selection {
+  background: var(--vinho-claro);
+  color: var(--pergaminho);
+}
+
+
+/* ============================================
+   CABEÇALHO
+   ============================================ */
+
+.topo {
+  height: 52px;
+
+  border-bottom: 1px solid var(--linha);
+
+  padding: var(--esp-sm) var(--esp-lg);
+
+  display: flex;
+  align-items: center;
+
+  gap: var(--esp-sm);
+
+  flex-shrink: 0;
+}
+
+.topo__logo {
+  width: 22px;
+  height: 22px;
+}
+
+.topo__titulo {
+  font-family: var(--fonte-display);
+
+  font-size: 1rem;
+
+  letter-spacing: 0.04em;
+
+  color: var(--dourado);
+}
+
+
+/* ============================================
+   LAYOUT PRINCIPAL
+   ============================================ */
+
+/*
+ * O layout agora usa FLEX em vez de GRID.
+ *
+ * Painel esquerdo:
+ *   430px fixos
+ *
+ * Painel direito:
+ *   ocupa todo o espaço restante
+ *
+ * Isso evita que os cards dos personagens
+ * sejam empurrados para outra linha.
+ */
+
+.layout-principal {
+  width: 100%;
+
+  height: calc(100vh - 52px);
+
+  display: flex;
+
+  gap: var(--esp-lg);
+
+  padding: var(--esp-lg);
+
+  margin: 0 auto;
+
+  align-items: stretch;
+
+  overflow: hidden;
+}
+
+
+/* ============================================
+   PAINÉIS
+   ============================================ */
+
+.painel {
+  background: var(--carvao-painel);
+
+  border: 1px solid var(--linha);
+
+  padding: var(--esp-md);
+
+  min-height: 0;
+
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* ============================================
+   PAINEL ESQUERDO — CRIAÇÃO
+   ============================================ */
+
+.layout-principal > .painel:first-child {
+  flex: 0 0 430px;
+  min-width: 430px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+
+/* ============================================
+   PAINEL DIREITO — AVENTUREIROS
+   ============================================ */
+
+.layout-principal > .painel:last-child {
+  flex: 1 1 auto;
+
+  min-width: 0;
+
+  overflow: hidden;
+}
+
+
+/* ============================================
+   TÍTULOS DOS PAINÉIS
+   ============================================ */
+
+.painel__titulo {
+  font-family: var(--fonte-display);
+
+  font-size: 1rem;
+
+  color: var(--dourado-claro);
+
+  letter-spacing: 0.02em;
+
+  margin-bottom: 0.65rem;
+
+  flex-shrink: 0;
+}
+
+.painel__cabecalho {
+  display: flex;
+
+  align-items: baseline;
+
+  justify-content: space-between;
+
+  gap: var(--esp-sm);
+
+  margin-bottom: var(--esp-md);
+
+  flex-shrink: 0;
+}
+
+
+/* ============================================
+   CAMPOS DO FORMULÁRIO
+   ============================================ */
+
+.campo {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 0.2rem;
+
+  margin-bottom: 0.65rem;
+
+  flex-shrink: 0;
+}
+
+.campo__rotulo {
+  font-size: 0.7rem;
+
+  color: var(--dourado-fosco);
+
+  letter-spacing: 0.05em;
+
+  text-transform: uppercase;
+}
+
+.campo__controle {
+  background: var(--carvao);
+
+  border: 1px solid var(--linha-forte);
+
+  color: var(--pergaminho);
+
+  font-family: var(--fonte-mono);
+
+  font-size: 0.86rem;
+
+  padding: 0.5rem 0.7rem;
+
+  border-radius: 2px;
+
+  width: 100%;
+
+  transition: border-color 120ms ease;
+}
+
+.campo__controle:focus {
+  border-color: var(--dourado);
+
+  outline: none;
+}
+
+select.campo__controle {
+  appearance: none;
+
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%23c9a15a' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E");
+
+  background-repeat: no-repeat;
+
+  background-position: right 0.7rem center;
+
+  padding-right: 1.8rem;
+
+  cursor: pointer;
+}
+
+.grade-campos {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: var(--esp-sm);
+
+  margin-bottom: 0.55rem;
+}
+
+
+/* ============================================
+   EDITOR DE ATRIBUTOS
+   ============================================ */
+
+.grade-atributos {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: var(--esp-xs) var(--esp-sm);
+
+  margin-bottom: 0.65rem;
+}
+
+.atributo-editor {
+  background: var(--carvao);
+
+  border: 1px solid var(--linha);
+
+  padding: 0.35rem var(--esp-sm);
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: var(--esp-sm);
+
+  min-height: 34px;
+}
+
+.atributo-editor__nome {
+  font-size: 0.65rem;
+
+  color: var(--pergaminho-fosco);
+
+  letter-spacing: 0.04em;
+
+  text-transform: uppercase;
+
+  flex: 1;
+}
+
+.atributo-editor__controles {
+  display: flex;
+
+  align-items: center;
+
+  gap: var(--esp-xs);
+}
+
+.atributo-editor__botao {
+  width: 19px;
+  height: 19px;
+
+  border-radius: 2px;
+
+  border: 1px solid var(--linha-forte);
+
+  background: transparent;
+
+  color: var(--dourado-fosco);
+
+  font-size: 0.85rem;
+
+  line-height: 1;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  transition:
+    border-color 120ms ease,
+    color 120ms ease;
+}
+
+.atributo-editor__botao:hover {
+  border-color: var(--dourado-brilho);
+
+  color: var(--dourado-brilho);
+}
+
+.atributo-editor__valor {
+  font-size: 0.85rem;
+
+  color: var(--dourado-claro);
+
+  min-width: 2ch;
+
+  text-align: center;
+}
+
+
+/* ============================================
+   PARTY — INSTRUÇÃO
+   ============================================ */
+
+.party__instrucao {
+  color: var(--pergaminho-tenue);
+
+  font-size: 0.72rem;
+
+  margin-top: -0.35rem;
+
+  margin-bottom: var(--esp-sm);
+
+  flex-shrink: 0;
+}
+
+
+/* ============================================
+   PARTY — LISTA DE COMPANHEIROS
+   ============================================ */
+
+.lista-companheiros {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 0.25rem;
+
+  width: 100%;
+
+  margin-bottom: 0.8rem;
+
+  overflow: visible;
+
+  padding-right: 0;
+
+  flex-shrink: 1;
+
+  min-height: 0;
+}
+
+.companheiro-checkbox {
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.4rem;
+
+  background: var(--carvao);
+
+  border: 1px solid var(--linha);
+
+  padding: 0.3rem 0.4rem;
+
+  cursor: pointer;
+
+  transition: border-color 120ms ease;
+
+  min-width: 0;
+}
+
+.companheiro-checkbox:hover {
+  border-color: var(--dourado-fosco);
+}
+
+.companheiro-checkbox input {
+  accent-color: var(--dourado);
+
+  cursor: pointer;
+
+  flex-shrink: 0;
+
+  margin: 0;
+}
+
+.companheiro-checkbox__info {
+  display: flex;
+
+  flex-direction: column;
+
+  min-width: 0;
+}
+
+.companheiro-checkbox__nome {
+  color: var(--pergaminho);
+
+  font-size: 0.7rem;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+.companheiro-checkbox__tipo {
+  color: var(--dourado-fosco);
+
+  font-size: 0.58rem;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+.companheiro-checkbox--desabilitado {
+  opacity: 0.4;
+
+  cursor: not-allowed;
+}
+
+
+/* ============================================
+   BOTÃO
+   ============================================ */
+
+.btn {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 0.4rem;
+
+  font-family: var(--fonte-mono);
+
+  font-size: 0.82rem;
+
+  letter-spacing: 0.03em;
+
+  padding: 0.6rem 1.2rem;
+
+  border-radius: 2px;
+
+  border: 1px solid var(--dourado-fosco);
+
+  background:
+    linear-gradient(
+      180deg,
+      var(--vinho-claro),
+      var(--vinho)
+    );
+
+  color: var(--pergaminho);
+
+  width: 100%;
+
+  transition:
+    border-color 120ms ease,
+    background-color 120ms ease;
+
+  margin-top: 0;
+
+  flex-shrink: 0;
+
+  min-height: 38px;
+
+  position: relative;
+
+  z-index: 2;
+}
+
+.btn:hover {
+  border-color: var(--dourado-brilho);
+
+  background:
+    linear-gradient(
+      180deg,
+      var(--vinho-brilho),
+      var(--vinho-claro)
+    );
+}
+
+
+/* ============================================
+   CONTADOR DA LISTA
+   ============================================ */
+
+.contador-personagens {
+  font-size: 0.72rem;
+
+  color: var(--pergaminho-tenue);
+
+  letter-spacing: 0.03em;
+}
+
+.contador-personagens strong {
+  color: var(--dourado-claro);
+}
+
+
+/* ============================================
+   LISTA DE PERSONAGENS
+   ============================================ */
+
+/*
+ * A lista ocupa todo o espaço restante
+ * do painel direito.
+ *
+ * O scroll fica SOMENTE aqui.
+ */
+
+.lista-personagens {
+  flex: 1 1 auto;
+
+  min-height: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: var(--esp-sm);
+
+  overflow-y: auto;
+
+  overflow-x: hidden;
+
+  padding-right: 0.25rem;
+}
+
+
+/* ============================================
+   CARD DO PERSONAGEM
+   ============================================ */
+
+/*
+ * IMPORTANTE:
+ *
+ * O card usa FLEX.
+ *
+ * Cada personagem ocupa uma única linha:
+ *
+ * ┌────────────┬────────────┬──────────────┐
+ * │ personagem │ atributos  │ party        │
+ * └────────────┴────────────┴──────────────┘
+ *
+ * Isso evita o problema anterior de um
+ * personagem cair para outra linha.
+ */
+
+.card-personagem {
+  flex: 0 0 auto;
+
+  width: 100%;
+
+  min-height: 125px;
+
+  background: var(--carvao);
+
+  border: 1px solid var(--linha-forte);
+
+  padding: var(--esp-sm);
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 1.5rem;
+}
+
+
+/* ============================================
+   CABEÇALHO DO CARD
+   ============================================ */
+
+.card-personagem__cabecalho {
+  flex: 1.1 1 0;
+
+  min-width: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: var(--esp-sm);
+}
+
+.card-personagem__imagem {
+  width: 96px;
+  height: 96px;
+
+  object-fit: cover;
+
+  border: 1px solid var(--linha-forte);
+
+  flex-shrink: 0;
+}
+
+.card-personagem__cabecalho > div {
+  min-width: 0;
+}
+
+.card-personagem__nome {
+  font-family: var(--fonte-display);
+
+  font-size: 1rem;
+
+  color: var(--pergaminho);
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+.card-personagem__tipo {
+  color: var(--dourado-fosco);
+
+  font-size: 0.7rem;
+
+  margin-top: 0.15rem;
+}
+
+.card-personagem__nivel {
+  color: var(--pergaminho-tenue);
+
+  font-size: 0.67rem;
+
+  margin-top: 0.15rem;
+}
+
+.card-personagem__nivel strong {
+  color: var(--dourado-claro);
+}
+
+
+/* ============================================
+   ATRIBUTOS DO CARD
+   ============================================ */
+
+.card-personagem__atributos {
+  flex: 1 1 0;
+
+  min-width: 0;
+
+  display: grid;
+
+  grid-template-columns: repeat(3, minmax(45px, 1fr));
+
+  gap: 0.3rem;
+}
+
+.card-personagem__atributo {
+  background: var(--carvao-painel);
+
+  border: 1px solid var(--linha);
+
+  padding: 0.3rem 0.35rem;
+
+  min-width: 45px;
+
+  min-height: 48px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+}
+
+.card-personagem__atributo-nome {
+  display: block;
+
+  color: var(--pergaminho-tenue);
+
+  font-size: 0.58rem;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.03em;
+}
+
+.card-personagem__atributo-valor {
+  display: block;
+
+  color: var(--dourado-claro);
+
+  font-size: 0.82rem;
+}
+
+
+/* ============================================
+   PARTY DO CARD
+   ============================================ */
+
+.card-personagem__party {
+  flex: 1 1 0;
+
+  min-width: 0;
+
+  border-left: 1px solid var(--linha);
+
+  padding-left: 1.8rem;
+
+  margin-left: 0.5rem;
+}
+
+.card-personagem__party-titulo {
+  display: block;
+
+  color: var(--dourado-fosco);
+
+  font-size: 0.65rem;
+
+  letter-spacing: 0.08em;
+
+  margin-bottom: 0.4rem;
+}
+
+.card-personagem__party-lista {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 0.7rem;
+
+  flex-wrap: wrap;
+}
+
+.party-vazia {
+  color: var(--pergaminho-tenue);
+
+  font-size: 0.68rem;
+}
+
+.party-companheiro {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 0.2rem;
+
+  min-width: 62px;
+}
+
+.party-companheiro__imagem {
+  width: 68px;
+  height: 68px;
+
+  object-fit: cover;
+
+  border: 1px solid var(--linha-forte);
+}
+
+.party-companheiro span {
+  color: var(--pergaminho-fosco);
+
+  font-size: 0.6rem;
+
+  text-align: center;
+
+  max-width: 72px;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+
+/* ============================================
+   ESTADO VAZIO / ERRO
+   ============================================ */
+
+.lista-estado {
+  color: var(--pergaminho-tenue);
+
+  font-size: 0.8rem;
+
+  padding: var(--esp-md) 0;
+}
+
+
+/* ============================================
+   SCROLLBAR
+   ============================================ */
+
+.lista-personagens::-webkit-scrollbar {
+  width: 5px;
+}
+
+.lista-personagens::-webkit-scrollbar-track {
+  background: var(--carvao);
+}
+
+.lista-personagens::-webkit-scrollbar-thumb {
+  background: var(--linha-forte);
+
+  border-radius: 3px;
+}
+
+.lista-personagens::-webkit-scrollbar-thumb:hover {
+  background: var(--dourado-fosco);
+}
+
+
+/* ============================================
+   POPUP
+   ============================================ */
+
+.popup-mensagem {
+  position: fixed;
+
+  right: var(--esp-lg);
+
+  bottom: var(--esp-lg);
+
+  background: var(--carvao-painel);
+
+  border: 1px solid var(--dourado-fosco);
+
+  color: var(--pergaminho);
+
+  padding: 0.7rem 1.1rem;
+
+  font-size: 0.8rem;
+
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+
+  opacity: 0;
+
+  transform: translateY(8px);
+
+  pointer-events: none;
+
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
+
+  z-index: 100;
+}
+
+.popup-mensagem--visivel {
+  opacity: 1;
+
+  transform: translateY(0);
+}
